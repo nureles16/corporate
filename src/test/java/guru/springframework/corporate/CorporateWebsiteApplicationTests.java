@@ -1,10 +1,10 @@
-package guru.springframework.corporatewebsite;
+package guru.springframework.corporate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CorporateWebsiteApplicationTests {
+class CorporateApplicationTests {
 
 	@Test
 	void contextLoads() {

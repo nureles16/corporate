@@ -1,6 +1,7 @@
 package guru.springframework.corporate.service;
 
 import guru.springframework.corporate.entity.Services;
+import guru.springframework.corporate.exception.NotFoundException;
 import guru.springframework.corporate.repository.ServicesRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class ServicesService {
     // 🔹 Получить услугу по ID
     public Services getServiceById(Long id) {
         return servicesRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Service not found"));
+                .orElseThrow(() -> new NotFoundException("Service not found with id: " + id));
     }
 
     // 🔹 Создать услугу (ADMIN)

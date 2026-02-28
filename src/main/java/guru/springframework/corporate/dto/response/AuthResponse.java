@@ -1,4 +1,4 @@
-package guru.springframework.corporate.dto.request;
+package guru.springframework.corporate.dto.response;
 
 public class AuthResponse {
 

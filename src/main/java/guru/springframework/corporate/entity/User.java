@@ -1,4 +1,4 @@
-package guru.springframework.corporatewebsite.entity;
+package guru.springframework.corporate.entity;
 
 import jakarta.persistence.*;
 

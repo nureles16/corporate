@@ -1,4 +1,4 @@
-package guru.springframework.corporatewebsite.entity;
+package guru.springframework.corporate.entity;
 
 public enum Role {
     ROLE_ADMIN,

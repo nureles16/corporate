@@ -1,4 +1,4 @@
-package guru.springframework.corporate.dto;
+package guru.springframework.corporate.dto.request;
 
 
 import jakarta.validation.constraints.Email;

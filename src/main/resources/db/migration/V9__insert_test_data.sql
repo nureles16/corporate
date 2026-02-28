@@ -1,6 +1,6 @@
-INSERT INTO roles (id, name) VALUES
-                                 (1, 'ROLE_ADMIN'),
-                                 (2, 'ROLE_USER');
+-- INSERT INTO roles (id, name) VALUES
+--                                  (1, 'ROLE_ADMIN'),
+--                                  (2, 'ROLE_USER');
 
 INSERT INTO users (id, username, password, enabled)
 VALUES (1, 'admin', '$2a$10$7QJ8YwG8XH0P3rF9kYdRrOD5eH4N8Yc6uLrX2v1ZtqK9jA7WqzF3O', true);

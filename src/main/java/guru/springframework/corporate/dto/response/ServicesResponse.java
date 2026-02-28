@@ -1,2 +1,36 @@
-package guru.springframework.corporate.dto.response;public class ServicesResponse {
+package guru.springframework.corporate.dto.response;
+
+import java.time.LocalDateTime;
+
+public class ServicesResponse {
+
+    private Long id;
+    private String title;
+    private String description;
+    private String iconUrl;
+    private Double price;
+    private boolean isPublished;
+    private LocalDateTime createdAt;
+
+    // Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public String getIconUrl() { return iconUrl; }
+    public void setIconUrl(String iconUrl) { this.iconUrl = iconUrl; }
+
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
+
+    public boolean isPublished() { return isPublished; }
+    public void setPublished(boolean published) { isPublished = published; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
