@@ -2,6 +2,7 @@ package guru.springframework.corporate.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
+import java.math.BigDecimal;
 
 public class ServicesRequest {
 
@@ -14,7 +15,7 @@ public class ServicesRequest {
     private String iconUrl;
 
     @PositiveOrZero(message = "Price must be positive")
-    private Double price;
+    private BigDecimal price;
 
     private boolean isPublished;
 
@@ -28,8 +29,8 @@ public class ServicesRequest {
     public String getIconUrl() { return iconUrl; }
     public void setIconUrl(String iconUrl) { this.iconUrl = iconUrl; }
 
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 
     public boolean isPublished() { return isPublished; }
     public void setPublished(boolean published) { isPublished = published; }

@@ -1,6 +1,7 @@
 package guru.springframework.corporate.entity;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,7 +20,8 @@ public class Services {
 
     private String iconUrl;
 
-    private Double price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 
     @Column(nullable = false)
     private boolean isPublished;
@@ -45,8 +47,8 @@ public class Services {
     public String getIconUrl() { return iconUrl; }
     public void setIconUrl(String iconUrl) { this.iconUrl = iconUrl; }
 
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 
     public boolean isPublished() { return isPublished; }
     public void setPublished(boolean published) { isPublished = published; }

@@ -17,7 +17,6 @@ public class News {
     @Column(length = 500)
     private String description;
 
-    @Lob
     private String content;
 
     private String imageUrl;

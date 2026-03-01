@@ -3,9 +3,10 @@ package guru.springframework.corporate.controller;
 import guru.springframework.corporate.dto.request.PortfolioRequest;
 import guru.springframework.corporate.dto.response.PortfolioResponse;
 import guru.springframework.corporate.entity.Portfolio;
-import guru.springframework.corporate.mapper.NewsMapper;
 import guru.springframework.corporate.mapper.PortfolioMapper;
 import guru.springframework.corporate.service.PortfolioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name = "Portfolio", description = "Portfolio management APIs")
 @RestController
 @RequestMapping("/api/portfolio")
 public class PortfolioController {
@@ -26,6 +28,7 @@ public class PortfolioController {
     }
 
     // 🔹 Просмотр всех опубликованных работ (USER + ADMIN)
+    @Operation(summary = "Get all published portfolio items")
     @GetMapping
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public List<PortfolioResponse> getAllPortfolios() {
@@ -44,6 +47,7 @@ public class PortfolioController {
     }
 
     // 🔹 Создать работу (ADMIN)
+    @Operation(summary = "Create new portfolio item")
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public PortfolioResponse createPortfolio(@Valid @RequestBody PortfolioRequest request) {

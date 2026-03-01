@@ -11,7 +11,7 @@ public class About {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
+    @Column(nullable = false)
     private String content;
 
     @Column(nullable = false)
