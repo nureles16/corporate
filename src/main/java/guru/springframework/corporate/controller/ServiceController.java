@@ -3,7 +3,6 @@ package guru.springframework.corporate.controller;
 import guru.springframework.corporate.dto.request.ServicesRequest;
 import guru.springframework.corporate.dto.response.ServicesResponse;
 import guru.springframework.corporate.entity.Services;
-import guru.springframework.corporate.mapper.NewsMapper;
 import guru.springframework.corporate.mapper.ServicesMapper;
 import guru.springframework.corporate.service.ServicesService;
 import jakarta.validation.Valid;
