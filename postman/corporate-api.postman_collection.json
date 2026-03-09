@@ -2,72 +2,275 @@
   "info": {
     "_postman_id": "7bd6d183-e82f-4aeb-b4d6-6ede2df2e6da",
     "name": "Corporate Website API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "26776185"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
       "name": "Auth",
-      "item": []
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"123456\",\n  \"role\": \"ADMIN\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","auth","register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","auth","login"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set(\"token\", jsonData.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "News",
-      "item": []
+      "item": [
+        {
+          "name": "Get All News",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/news",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","news"]
+            }
+          }
+        },
+        {
+          "name": "Get News by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/news/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","news","1"]
+            }
+          }
+        },
+        {
+          "name": "Create News",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Новость 1\",\n  \"description\": \"Краткое описание\",\n  \"content\": \"Полный текст новости\",\n  \"imageUrl\": \"http://example.com/image.jpg\",\n  \"isPublished\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/news",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","news"]
+            }
+          }
+        },
+        {
+          "name": "Update News",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Новость 1 обновленная\",\n  \"description\": \"Обновленное описание\",\n  \"content\": \"Обновленный текст\",\n  \"imageUrl\": \"http://example.com/image2.jpg\",\n  \"isPublished\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/news/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","news","1"]
+            }
+          }
+        },
+        {
+          "name": "Delete News",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/news/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","news","1"]
+            }
+          }
+        }
+      ]
     },
     {
       "name": "Portfolio",
-      "item": []
+      "item": [
+        {
+          "name": "Get All Portfolio",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization","value": "Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/api/portfolio","host":["{{baseUrl}}"],"path":["api","portfolio"]}
+          }
+        },
+        {
+          "name": "Create Portfolio",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization","value": "Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],
+            "body":{"mode":"raw","raw":"{\n  \"title\":\"Проект 1\",\n  \"description\":\"Описание проекта\",\n  \"imageUrl\":\"http://example.com/project.jpg\",\n  \"projectUrl\":\"http://example.com\",\n  \"isPublished\":true\n}"},
+            "url":{"raw":"{{baseUrl}}/api/portfolio","host":["{{baseUrl}}"],"path":["api","portfolio"]}
+          }
+        }
+      ]
     },
     {
       "name": "Services",
-      "item": []
+      "item": [
+        {
+          "name": "Get All Services",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization","value": "Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/api/services","host":["{{baseUrl}}"],"path":["api","services"]}
+          }
+        },
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization","value": "Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],
+            "body":{"mode":"raw","raw":"{\n  \"title\":\"Услуга 1\",\n  \"description\":\"Описание услуги\",\n  \"iconUrl\":\"http://example.com/icon.png\",\n  \"price\":100,\n  \"isPublished\":true\n}"},
+            "url":{"raw":"{{baseUrl}}/api/services","host":["{{baseUrl}}"],"path":["api","services"]}
+          }
+        }
+      ]
     },
     {
       "name": "About",
-      "item": []
+      "item": [
+        {
+          "name": "Get About",
+          "request": {"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/about","host":["{{baseUrl}}"],"path":["api","about"]}}
+        },
+        {
+          "name": "Update About",
+          "request": {
+            "method":"PUT",
+            "header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],
+            "body":{"mode":"raw","raw":"{\n  \"content\":\"Новая информация о компании\"\n}"},
+            "url":{"raw":"{{baseUrl}}/api/about/1","host":["{{baseUrl}}"],"path":["api","about","1"]}
+          }
+        }
+      ]
     },
     {
       "name": "Contacts",
-      "item": []
+      "item": [
+        {
+          "name": "Get Contacts",
+          "request": {"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/contacts","host":["{{baseUrl}}"],"path":["api","contacts"]}}
+        },
+        {
+          "name": "Update Contacts",
+          "request": {
+            "method":"PUT",
+            "header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],
+            "body":{"mode":"raw","raw":"{\n  \"phone\":\"+996123456789\",\n  \"email\":\"info@example.com\",\n  \"address\":\"г. Бишкек, ул. Ленина\",\n  \"googleMapUrl\":\"https://maps.google.com/...\"\n}"},
+            "url":{"raw":"{{baseUrl}}/api/contacts/1","host":["{{baseUrl}}"],"path":["api","contacts","1"]}
+          }
+        }
+      ]
     },
     {
       "name": "Banner",
-      "item": []
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
+      "item": [
+        {
+          "name": "Get Active Banner",
+          "request": {"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/banner","host":["{{baseUrl}}"],"path":["api","banner"]}}
+        },
+        {
+          "name": "Create Banner",
+          "request": {
+            "method":"POST",
+            "header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],
+            "body":{"mode":"raw","raw":"{\n  \"title\":\"Главный баннер\",\n  \"subtitle\":\"Подзаголовок\",\n  \"imageUrl\":\"http://example.com/banner.jpg\",\n  \"buttonText\":\"Подробнее\",\n  \"buttonLink\":\"/services\",\n  \"isActive\":true\n}"},
+            "url":{"raw":"{{baseUrl}}/api/banner","host":["{{baseUrl}}"],"path":["api","banner"]}
+          }
+        }
+      ]
     }
   ],
   "variable": [
-    {
-      "key": "baseUrl",
-      "value": ""
-    },
-    {
-      "key": "token",
-      "value": "",
-      "type": "any"
-    }
+    {"key":"baseUrl","value":"http://localhost:8080"},
+    {"key":"token","value":""}
   ]
 }
