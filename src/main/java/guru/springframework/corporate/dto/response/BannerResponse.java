@@ -2,16 +2,21 @@ package guru.springframework.corporate.dto.response;
 
 import java.time.LocalDateTime;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 public class BannerResponse {
 
+    @Schema(example = "1")
     private Long id;
+    @Schema(example = "Welcome to our website")
     private String title;
     private String subtitle;
     private String imageUrl;
     private String buttonText;
     private String buttonLink;
     private boolean isActive;
+    @Schema(description = "Banner creation time")
     private LocalDateTime createdAt;
+    @Schema(description = "Banner last update time")
     private LocalDateTime updatedAt;
 
     // Getters & Setters
