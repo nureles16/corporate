@@ -12,8 +12,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+@Tag(name = "Services", description = "Services management API")
 @RestController
 @RequestMapping("/api/services")
 public class ServiceController {
@@ -24,17 +26,19 @@ public class ServiceController {
         this.servicesService = servicesService;
     }
 
-    // 🔹 Просмотр всех опубликованных услуг (USER + ADMIN)
+    // 🔹 Просмотр всех опубликованных услуг
+    @Operation(summary = "Get all published services")
     @GetMapping
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public List<ServicesResponse> getAllServices() {
         return servicesService.getAllPublishedServices()
                 .stream()
                 .map(ServicesMapper::toResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // 🔹 Просмотр услуги по ID
+    @Operation(summary = "Get service by ID")
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ServicesResponse getServiceById(@PathVariable Long id) {
@@ -42,30 +46,35 @@ public class ServiceController {
         return ServicesMapper.toResponse(service);
     }
 
-    // 🔹 Создать услугу (ADMIN)
+    // 🔹 Создать услугу
+    @Operation(summary = "Create new service (Admin only)")
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ServicesResponse createService(@Valid @RequestBody ServicesRequest request) {
+    public ResponseEntity<ServicesResponse> createService(
+            @Valid @RequestBody ServicesRequest request) {
         Services service = ServicesMapper.toEntity(request);
         Services saved = servicesService.createService(service);
-//        return ServicesMapper.toResponse(saved);
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(ServicesMapper.toResponse(saved)).getBody();
+                .body(ServicesMapper.toResponse(saved));
     }
 
-    // 🔹 Обновить услугу (ADMIN)
+    // 🔹 Обновить услугу
+    @Operation(summary = "Update service (Admin only)")
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ServicesResponse updateService(@PathVariable Long id,
-                                          @Valid @RequestBody ServicesRequest request) {
+    public ServicesResponse updateService(
+            @PathVariable Long id,
+            @Valid @RequestBody ServicesRequest request) {
         Services existing = servicesService.getServiceById(id);
         ServicesMapper.updateEntity(existing, request);
         Services updated = servicesService.updateService(id, existing);
         return ServicesMapper.toResponse(updated);
     }
 
-    // 🔹 Удалить услугу (ADMIN)
+    // 🔹 Удалить услугу
+    @Operation(summary = "Delete service (Admin only)")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('ADMIN')")

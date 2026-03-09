@@ -4,19 +4,25 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 public class ServicesRequest {
 
+    @Schema(description = "Service title", example = "Web Development")
     @NotBlank(message = "Title is required")
     private String title;
 
+    @Schema(description = "Service description", example = "Full-stack web development using modern technologies")
     @NotBlank(message = "Description is required")
     private String description;
 
+    @Schema(description = "Service icon URL", example = "https://example.com/icon.png")
     private String iconUrl;
 
+    @Schema(description = "Service price", example = "500.00")
     @PositiveOrZero(message = "Price must be positive")
     private BigDecimal price;
 
+    @Schema(description = "Publication status", example = "true")
     private boolean isPublished;
 
     // Getters & Setters
