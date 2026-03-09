@@ -14,7 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Tag(name = "Portfolio", description = "Portfolio management APIs")
 @RestController
@@ -27,7 +26,7 @@ public class PortfolioController {
         this.portfolioService = portfolioService;
     }
 
-    // 🔹 Просмотр всех опубликованных работ (USER + ADMIN)
+    // 🔹 Просмотр всех опубликованных работ
     @Operation(summary = "Get all published portfolio items")
     @GetMapping
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
@@ -35,10 +34,11 @@ public class PortfolioController {
         return portfolioService.getAllPublishedPortfolios()
                 .stream()
                 .map(PortfolioMapper::toResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // 🔹 Просмотр работы по ID
+    @Operation(summary = "Get portfolio item by ID")
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public PortfolioResponse getPortfolioById(@PathVariable Long id) {
@@ -46,31 +46,35 @@ public class PortfolioController {
         return PortfolioMapper.toResponse(portfolio);
     }
 
-    // 🔹 Создать работу (ADMIN)
-    @Operation(summary = "Create new portfolio item")
+    // 🔹 Создать работу
+    @Operation(summary = "Create new portfolio item (Admin only)")
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public PortfolioResponse createPortfolio(@Valid @RequestBody PortfolioRequest request) {
+    public ResponseEntity<PortfolioResponse> createPortfolio(
+            @Valid @RequestBody PortfolioRequest request) {
         Portfolio portfolio = PortfolioMapper.toEntity(request);
         Portfolio saved = portfolioService.createPortfolio(portfolio);
-//        return PortfolioMapper.toResponse(saved);
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(PortfolioMapper.toResponse(saved)).getBody();
+                .body(PortfolioMapper.toResponse(saved));
     }
 
-    // 🔹 Обновить работу (ADMIN)
+    // 🔹 Обновить работу
+    @Operation(summary = "Update portfolio item (Admin only)")
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public PortfolioResponse updatePortfolio(@PathVariable Long id,
-                                             @Valid @RequestBody PortfolioRequest request) {
+    public PortfolioResponse updatePortfolio(
+            @PathVariable Long id,
+            @Valid @RequestBody PortfolioRequest request) {
         Portfolio existing = portfolioService.getPortfolioById(id);
         PortfolioMapper.updateEntity(existing, request);
         Portfolio updated = portfolioService.updatePortfolio(id, existing);
         return PortfolioMapper.toResponse(updated);
     }
 
-    // 🔹 Удалить работу (ADMIN)
+    // 🔹 Удалить работу
+    @Operation(summary = "Delete portfolio item (Admin only)")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('ADMIN')")
