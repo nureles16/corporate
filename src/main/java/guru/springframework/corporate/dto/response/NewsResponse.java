@@ -2,14 +2,19 @@ package guru.springframework.corporate.dto.response;
 
 import java.time.LocalDateTime;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 public class NewsResponse {
 
+    @Schema(example = "1")
     private Long id;
+    @Schema(example = "Company launches new product")
     private String title;
     private String description;
     private String content;
     private String imageUrl;
+    @Schema(description = "Creation date")
     private LocalDateTime createdAt;
+    @Schema(description = "Last update date")
     private LocalDateTime updatedAt;
     private boolean isPublished;
 
