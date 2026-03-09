@@ -1,0 +1,2 @@
+INSERT INTO banner (title, subtitle, image_url, button_text, button_link, is_active, created_at, updated_at) VALUES
+    ('Добро пожаловать на наш сайт', 'Лучшие IT решения для вашего бизнеса', 'https://example.com/banner.jpg', 'Подробнее', '/services', TRUE, NOW(), NOW());

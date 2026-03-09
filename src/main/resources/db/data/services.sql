@@ -1,0 +1,3 @@
+INSERT INTO services (title, description, icon_url, price, is_published, created_at) VALUES
+                                                                                         ('Веб-разработка', 'Создание сайтов и приложений', 'https://example.com/icons/web.png', 500.00, TRUE, NOW()),
+                                                                                         ('SEO оптимизация', 'Продвижение сайтов', 'https://example.com/icons/seo.png', 300.00, TRUE, NOW());

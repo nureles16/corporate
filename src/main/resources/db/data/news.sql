@@ -1,0 +1,4 @@
+INSERT INTO news (title, description, content, image_url, created_at, updated_at, is_published) VALUES
+                                                                                                    ('Запуск нового продукта', 'Краткое описание продукта', 'Полный текст новости о запуске нового продукта', 'https://example.com/image1.jpg', NOW(), NOW(), TRUE),
+                                                                                                    ('Событие компании', 'Краткое описание события', 'Подробности события компании', 'https://example.com/image2.jpg', NOW(), NOW(), TRUE),
+                                                                                                    ('Внутренние новости', 'Для внутренних целей', 'Новость не для пользователей', NULL, NOW(), NOW(), FALSE);

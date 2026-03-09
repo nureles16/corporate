@@ -1,0 +1,3 @@
+INSERT INTO portfolio (title, description, image_url, project_url, created_at, is_published) VALUES
+                                                                                                 ('Сайт компании A', 'Разработка корпоративного сайта', 'https://example.com/portfolio1.jpg', 'https://companyA.com', NOW(), TRUE),
+                                                                                                 ('Мобильное приложение B', 'Разработка мобильного приложения', 'https://example.com/portfolio2.jpg', 'https://appB.com', NOW(), TRUE);
