@@ -63,6 +63,7 @@ spring.jpa.hibernate.ddl-auto=validate
 spring.jpa.show-sql=true
 
 spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration
 ```
 ---
 
