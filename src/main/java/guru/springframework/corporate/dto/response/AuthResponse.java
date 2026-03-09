@@ -1,9 +1,15 @@
 package guru.springframework.corporate.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 public class AuthResponse {
 
+    @Schema(description = "JWT authentication token")
     private String token;
+
+    @Schema(description = "Username of authenticated user", example = "nureles")
     private String username;
+
+    @Schema(description = "User role", example = "ADMIN")
     private String role;
 
     public AuthResponse() {

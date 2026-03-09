@@ -9,6 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Authentication", description = "User authentication APIs")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -20,6 +24,7 @@ public class AuthController {
     }
 
     // 🔹 Регистрация
+    @Operation(summary = "Register a new user")
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(
             @Valid @RequestBody RegisterRequest request) {
@@ -32,6 +37,7 @@ public class AuthController {
     }
 
     // 🔹 Логин
+    @Operation(summary = "User login and JWT token generation")
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(
             @Valid @RequestBody LoginRequest request) {
