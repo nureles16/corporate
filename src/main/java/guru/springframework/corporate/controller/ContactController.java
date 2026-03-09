@@ -9,8 +9,11 @@ import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/api/contacts")
+@Tag(name = "Contacts", description = "Contacts page management API")
 public class ContactController {
 
     private final ContactService contactService;
@@ -20,6 +23,8 @@ public class ContactController {
     }
 
     // 🔹 Просмотр контактов (USER + ADMIN)
+    @Operation(summary = "Get contacts information",
+            description = "Returns company contact information")
     @GetMapping
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ContactsResponse getContacts() {
@@ -28,10 +33,12 @@ public class ContactController {
     }
 
     // 🔹 Обновление контактов (ADMIN)
+    @Operation(summary = "Update contacts information (Admin only)")
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ContactsResponse updateContacts(@PathVariable Long id,
-                                           @Valid @RequestBody ContactsRequest request) {
+    public ContactsResponse updateContacts(
+            @PathVariable Long id,
+            @Valid @RequestBody ContactsRequest request) {
         Contacts existing = contactService.getContactsById(id);
         ContactsMapper.updateEntity(existing, request);
         Contacts updated = contactService.updateContacts(existing);
